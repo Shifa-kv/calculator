@@ -8,40 +8,40 @@ function App() {
   const values = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
   const handleOperator = async (value) => {
-      if (Operator !== ''){
-        handleCalculate();
-        setNumber('0')
-      }
-      else{
-        setPrevNumber(Numbers);
-        setNumber('0')
-      } 
-      if(State.sum=='Infinity' || isNaN(State.sum)){
-        setPrevNumber(0);
-        setState({sum:0, input: Numbers + value, status: false });
-      }
-      else{
+    if (Operator !== '') {
+      handleCalculate();
+      setNumber('0')
+    }
+    else {
+      setPrevNumber(Numbers);
+      setNumber('0')
+    }
+    if (State.sum == 'Infinity' || isNaN(State.sum)) {
+      setPrevNumber(0);
+      setState({ sum: 0, input: Numbers + value, status: false });
+    }
+    else {
       setState((prevState) => ({ ...prevState, input: prevState.input + value, status: false }));
-      }
-      setOperator(value);
+    }
+    setOperator(value);
   }
 
   const handleInput = (value) => {
     if (value === '.' && Numbers.includes('.')) {
       return;
     }
-    else if(State.status){
+    else if (State.status) {
       setNumber(value);
       setState((prevState) => ({ ...prevState, input: value.toString(), status: false }));
     }
-    else{
+    else {
       setNumber(Numbers.toString() + value);
       setState((prevState) => ({ ...prevState, input: prevState.input.toString() + value, status: false }));
     }
   }
 
   const handleCalculate = (method) => {
-    if(Operator){
+    if (Operator) {
       let sum;
       switch (Operator) {
         case '+':
@@ -59,16 +59,16 @@ function App() {
         default:
           break;
       }
-      if(method == '='){
-      setState({ sum, status: true, input: sum });
-      setNumber(sum.toString());
-      setPrevNumber('')
-      setOperator('');
+      if (method == '=') {
+        setState({ sum, status: true, input: sum });
+        setNumber(sum.toString());
+        setPrevNumber('')
+        setOperator('');
       }
-      else{
-      setPrevNumber(sum.toString())
+      else {
+        setPrevNumber(sum.toString())
       }
-      if(sum=='Infinity' || isNaN(sum)){
+      if (sum == 'Infinity' || isNaN(sum)) {
         setPrevNumber(0);
         setNumber('');
       }
@@ -100,7 +100,7 @@ function App() {
           <button onClick={() => { handleOperator('/') }}>/</button>
           <button onClick={() => { handleOperator('*') }}>x</button>
           <button onClick={() => { handleOperator('-') }}>-</button>
-          <button onClick={()=>{handleCalculate('=')}}>
+          <button onClick={() => { handleCalculate('=') }}>
             =
           </button>
         </div>
